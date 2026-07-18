@@ -1,10 +1,10 @@
-// app/download/apk/page.tsx
 'use client';
 
-import { useMemo } from 'react';
+import { useMemo, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 
-export default function SecuredApkDownloadPage() {
+// 1. The core content wrapper that uses the search parameters
+function DownloadPageContent() {
   const searchParams = useSearchParams();
   const referenceNumber = useMemo(() => searchParams.get('referenceNumber'), [searchParams]);
   const hasReference = Boolean(referenceNumber);
@@ -53,5 +53,20 @@ export default function SecuredApkDownloadPage() {
         )}
       </div>
     </div>
+  );
+}
+
+// 2. Main page export wrapping the content in Suspense to clear prerender errors
+export default function SecuredApkDownloadPage() {
+  return (
+    <Suspense 
+      fallback={
+        <div className="min-h-screen bg-slate-950 flex items-center justify-center text-slate-400 text-sm">
+          Loading portal setup...
+        </div>
+      }
+    >
+      <DownloadPageContent />
+    </Suspense>
   );
 }
