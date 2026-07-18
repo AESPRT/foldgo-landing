@@ -1,26 +1,135 @@
 @import "tailwindcss";
 
+/* --- THEME CUSTOMIZATIONS & CSS VARIABLES --- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  /* Font Family Anchor */
+  --font-sans: var(--font-plus-jakarta-sans), Arial, Helvetica, sans-serif;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Neutral Theme Tokens - Light Mode Mappings */
+  --background: #F8F9FA;
+  /* BackgroundLight */
+  --surface: #FFFFFF;
+  /* SurfaceLight */
+  --on-surface: #1A1C1E;
+  /* OnSurfaceLight */
+  --surface-variant: #E1E2E5;
+  /* SurfaceVariantLight */
+
+  /* Brand and Status Tokens */
+  --deep-ocean-blue: #005CBB;
+  --mint-green: #00C853;
+
+  --intake-amber: #FFFFAB00;
+  --processing-sky-blue: #03A9F4;
+  --ready-emerald-green: #4CAF50;
+  --error-crimson-red: #D32F2F;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Neutral Theme Tokens - Dark Mode Mappings */
+    --background: #1A1C1E;
+    /* BackgroundDark */
+    --surface: #1A1C1E;
+    /* SurfaceDark */
+    --on-surface: #E2E2E6;
+    /* OnSurfaceDark */
+    --surface-variant: #44474E;
+    /* SurfaceVariantDark */
+
+    /* Dark Variant Brand Shift offsets */
+    --deep-ocean-blue: #4A90E2;
+    /* DeepOceanBlueDark */
+    --mint-green: #69F0AE;
+    /* MintGreenDark */
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* --- TAILWIND V4 CONFIGURATION EXTENSIONS --- */
+@theme {
+  --font-sans: var(--font-sans);
+
+  --color-background-custom: var(--background);
+  --color-surface-custom: var(--surface);
+  --color-on-surface-custom: var(--on-surface);
+  --color-surface-variant-custom: var(--surface-variant);
+
+  --color-deep-ocean-blue: var(--deep-ocean-blue);
+  --color-mint-green: var(--mint-green);
+
+  --color-intake-amber: var(--intake-amber);
+  --color-processing-sky-blue: var(--processing-sky-blue);
+  --color-ready-emerald-green: var(--ready-emerald-green);
+  --color-error-crimson-red: var(--error-crimson-red);
+}
+
+/* --- MATERIAL DESIGN TYPOGRAPHY SCALES --- */
+@utility display-large {
+  @apply font-bold text-[57px] leading-[64px] tracking-[-0.25px];
+}
+
+@utility display-medium {
+  @apply font-bold text-[45px] leading-[52px] tracking-[0px];
+}
+
+@utility display-small {
+  @apply font-bold text-[36px] leading-[44px] tracking-[0px];
+}
+
+@utility headline-large {
+  @apply font-semibold text-[32px] leading-[40px] tracking-[0px];
+}
+
+@utility headline-medium {
+  @apply font-semibold text-[28px] leading-[36px] tracking-[0px];
+}
+
+@utility headline-small {
+  @apply font-semibold text-[24px] leading-[32px] tracking-[0px];
+}
+
+@utility title-large {
+  @apply font-semibold text-[22px] leading-[28px] tracking-[0px];
+}
+
+@utility title-medium {
+  @apply font-semibold text-[16px] leading-[24px] tracking-[0.15px];
+}
+
+@utility title-small {
+  @apply font-medium text-[14px] leading-[20px] tracking-[0.1px];
+}
+
+@utility body-large {
+  @apply font-normal text-[16px] leading-[24px] tracking-[0.5px];
+}
+
+@utility body-medium {
+  @apply font-normal text-[14px] leading-[20px] tracking-[0.25px];
+}
+
+@utility body-small {
+  @apply font-normal text-[12px] leading-[16px] tracking-[0.4px];
+}
+
+@utility label-large {
+  @apply font-medium text-[14px] leading-[20px] tracking-[0.1px];
+}
+
+@utility label-medium {
+  @apply font-medium text-[12px] leading-[16px] tracking-[0.5px];
+}
+
+@utility label-small {
+  @apply font-medium text-[11px] leading-[16px] tracking-[0.5px];
+}
+
+/* --- BASE GLOBAL APPLICATION ELEMENT ALIGNMENT --- */
+@layer base {
+  body {
+    background-color: var(--background);
+    color: var(--on-surface);
+    font-family: var(--font-sans);
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
 }
