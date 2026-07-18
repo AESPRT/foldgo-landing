@@ -5,15 +5,15 @@ import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 
 interface PaymentSuccessProps {
-  searchParams: Promise<{ referenceNumber?: string; sessionToken?: string }>;
+  searchParams: Promise<{ referenceNumber?: string; token?: string }>;
 }
 
 const PaymentSuccessPage = async ({ searchParams }: PaymentSuccessProps) => {
-  const { referenceNumber, sessionToken } = await searchParams;
+  const { referenceNumber, token } = await searchParams;
   const cookieStore = await cookies();
   const storedToken = cookieStore.get('foldgo_payment_token')?.value;
 
-  if (!referenceNumber || !sessionToken || sessionToken !== storedToken) {
+  if (!referenceNumber || !token || token !== storedToken) {
     notFound();
   }
 

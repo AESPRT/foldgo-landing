@@ -88,7 +88,7 @@ export const PricingCard: React.FC<PricingCardProps> = ({ plan, cycle }) => {
           cusEmail: customer.email.trim(),
           cusName: customer.name.trim(),
           cusPhone: customer.phone.trim(),
-          paymentToken: token,
+          sessionToken: token,
           successUrl,
           cancelUrl,
         }),
