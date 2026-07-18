@@ -18,25 +18,27 @@ export const SUBSCRIPTION_PLANS: PricingPlan[] = [
   {
     id: 'plan-basic',
     name: 'Standard Hub',
-    tagline: 'Perfect for local neighborhood laundry operations scaling up.',
+    tagline: 'Perfect for local operators managing a single neighborhood branch.',
     monthlyPrice: 1499,
     annuallyPricePerMonth: 1199,
     features: [
-      'Up to 500 active orders processed monthly',
-      'Automated SMS tracking & delivery notifications',
+      'Limited shop creation (Up to 1 shop only)',
       'Basic revenue & real-time branch performance analytics',
-      'Single device operator login access'
+      'Single device operator login access',
+      '❌ No online kiosk ordering included',
+      '❌ No SMS tracking notifications'
     ]
   },
   {
     id: 'plan-premium',
     name: 'Enterprise Loop',
-    tagline: 'Built for high-volume multi-branch commercial hubs.',
+    tagline: 'Built for high-volume multi-branch commercial operations.',
     monthlyPrice: 3499,
     annuallyPricePerMonth: 2799,
     features: [
-      'Unlimited order queuing loop optimization',
-      'Whitelabel custom client-facing interface branding overrides',
+      'Unlimited shop creation across multiple locations',
+      'Full online kiosk ordering integration included',
+      'Automated SMS tracking & delivery loops',
       'Advanced driver dispatch & live routing metrics tracking',
       'Unlimited operations manager seats',
       'Priority 24/7 technical fallback support channels'
@@ -48,7 +50,7 @@ export const SUBSCRIPTION_PLANS: PricingPlan[] = [
 export const OPERATIONAL_STEPS: OperationalStep[] = [
   {
     number: "01",
-    title: "Instant Kiosk intake",
+    title: "Instant Kiosk Intake",
     description: "Customers or counter staff queue jobs instantly. Clothes are weighed, tagged with smart identification tokens, and assigned distinct operational tracks."
   },
   {
