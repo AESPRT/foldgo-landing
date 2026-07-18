@@ -17,8 +17,6 @@ const PaymentSuccessPage = async ({ searchParams }: PaymentSuccessProps) => {
     notFound();
   }
 
-  cookieStore.delete('foldgo_payment_token');
-
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex items-center justify-center px-6 py-16">
       <main className="w-full max-w-3xl rounded-[2rem] border border-slate-800 bg-slate-900/95 p-10 shadow-[0_35px_120px_-50px_rgba(15,23,42,0.9)]">
