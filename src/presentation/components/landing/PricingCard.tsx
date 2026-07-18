@@ -126,7 +126,7 @@ export const PricingCard: React.FC<PricingCardProps> = ({ plan, cycle }) => {
           : 'border-slate-800 hover:border-slate-700'
       }`}>
       {plan.isPopular && (
-        <div className="absolute -top-3 left-5 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.32em] text-white shadow-lg shadow-blue-500/20">
+        <div className="absolute left-1/2 top-0 z-10 -translate-x-1/2 -translate-y-1/2 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.32em] text-white shadow-lg shadow-blue-500/20">
           Recommended Setup
         </div>
       )}

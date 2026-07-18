@@ -37,13 +37,20 @@ const PaymentSuccessPage = async ({ searchParams }: PaymentSuccessProps) => {
           <p className="mt-3 text-lg font-semibold text-white">{referenceNumber}</p>
         </div>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2">
+        <div className="mt-10 grid gap-4 sm:grid-cols-3">
           <Link
             href="/#pricing"
             className="inline-flex items-center justify-center rounded-3xl bg-blue-600 px-6 py-4 text-sm font-semibold text-white transition hover:bg-blue-500"
           >
             View more plans
           </Link>
+          <a
+            href="/downloads/fold-go.apk"
+            className="inline-flex items-center justify-center rounded-3xl bg-emerald-600 px-6 py-4 text-sm font-semibold text-white transition hover:bg-emerald-500"
+            download
+          >
+            Download APK
+          </a>
           <Link
             href="/#contact"
             className="inline-flex items-center justify-center rounded-3xl border border-slate-800 bg-slate-900 px-6 py-4 text-sm font-semibold text-slate-200 transition hover:border-blue-500 hover:text-white"
