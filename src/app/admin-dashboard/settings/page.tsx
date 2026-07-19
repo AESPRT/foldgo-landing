@@ -4,13 +4,11 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/presentation/context/AuthContext';
 import { DashboardLayout } from '@/presentation/components/admin/DashboardLayout';
-import { WelcomeCard } from '@/presentation/components/admin/WelcomeCard';
 
-export default function DashboardPage() {
+export default function SettingsPage() {
   const router = useRouter();
   const { isAuthenticated, logout } = useAuth();
 
-  // Redirect to login if not authenticated
   React.useEffect(() => {
     if (!isAuthenticated) {
       router.push('/admin-dashboard/login');
@@ -22,13 +20,14 @@ export default function DashboardPage() {
     router.push('/admin-dashboard/login');
   };
 
-  if (!isAuthenticated) {
-    return null;
-  }
+  if (!isAuthenticated) return null;
 
   return (
     <DashboardLayout onLogout={handleLogout}>
-      <WelcomeCard />
+      <div className="rounded-[2rem] border border-slate-800 bg-slate-950/90 p-8">
+        <h2 className="text-3xl font-bold text-white mb-4">Settings</h2>
+        <p className="text-slate-400">Configure account settings, preferences, and security options.</p>
+      </div>
     </DashboardLayout>
   );
 }
