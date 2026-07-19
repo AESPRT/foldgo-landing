@@ -66,6 +66,8 @@ export const PricingCard: React.FC<PricingCardProps> = ({ plan, cycle }) => {
 
   const handleSubscriptionCheckout = async () => {
     if (!validateCustomer()) {
+      // FIX: Reset loading state immediately so the form doesn't lock up inside the modal view
+      setLoading(false);
       setShowCustomerModal(true);
       return;
     }
@@ -109,29 +111,39 @@ export const PricingCard: React.FC<PricingCardProps> = ({ plan, cycle }) => {
     }
   };
 
-  const handleCustomerSave = () => {
+  const handleCustomerSave = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Stop underlying click leaking
     if (validateCustomer()) {
       setShowCustomerModal(false);
       handleSubscriptionCheckout();
     }
   };
 
-  const handleOpenModal = () => setShowCustomerModal(true);
-  const handleCloseModal = () => setShowCustomerModal(false);
+  const handleOpenModal = () => {
+    setErrors({ email: '', name: '', phone: '' });
+    setShowCustomerModal(true);
+  };
+  
+  const handleCloseModal = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    setShowCustomerModal(false);
+  };
 
   return (
-    <div className={`relative overflow-hidden rounded-[2rem] border bg-slate-950/90 shadow-[0_35px_120px_-50px_rgba(15,23,42,0.9)] transition-all duration-300 ${
+    /* FIX: Removed overflow-hidden from root card container so badge is visible */
+    <div className={`relative rounded-[2rem] border bg-slate-950/90 shadow-[0_35px_120px_-50px_rgba(15,23,42,0.9)] transition-all duration-300 ${
         plan.isPopular
           ? 'border-blue-500/30 shadow-blue-500/10'
           : 'border-slate-800 hover:border-slate-700'
       }`}>
       {plan.isPopular && (
-        <div className="absolute left-1/2 top-0 z-10 -translate-x-1/2 -translate-y-1/2 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.32em] text-white shadow-lg shadow-blue-500/20">
+        <div className="absolute left-1/2 top-0 z-20 -translate-x-1/2 -translate-y-1/2 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.32em] text-white shadow-lg shadow-blue-500/20 whitespace-nowrap">
           Recommended Setup
         </div>
       )}
 
-      <div className="relative p-8 sm:p-10">
+      {/* Internal wrapper regains overflow-hidden safely where needed */}
+      <div className="relative overflow-hidden rounded-[2rem] p-8 sm:p-10">
         <div className="space-y-8">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
             <div className="max-w-[62%]">
@@ -211,8 +223,15 @@ export const PricingCard: React.FC<PricingCardProps> = ({ plan, cycle }) => {
       </div>
 
       {showCustomerModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/90 px-4 py-8">
-          <div className="w-full max-w-2xl overflow-hidden rounded-[2rem] border border-slate-800 bg-slate-950 shadow-2xl shadow-slate-950/70">
+        /* FIX: High z-index layout overlay structure configuration to clear lower layers */
+        <div 
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-slate-950/80 backdrop-blur-sm px-4 py-8"
+          onClick={() => handleCloseModal()}
+        >
+          <div 
+            className="relative w-full max-w-2xl overflow-hidden rounded-[2rem] border border-slate-800 bg-slate-950 shadow-2xl z-[10000]"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="flex flex-col gap-4 border-b border-slate-800 bg-slate-900/90 px-8 py-6 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <p className="text-xs uppercase tracking-[0.32em] text-blue-400">Checkout profile</p>
@@ -221,7 +240,7 @@ export const PricingCard: React.FC<PricingCardProps> = ({ plan, cycle }) => {
               </div>
               <button
                 type="button"
-                onClick={handleCloseModal}
+                onClick={() => handleCloseModal()}
                 className="text-3xl font-semibold leading-none text-slate-500 transition hover:text-slate-200"
               >
                 ×
@@ -270,10 +289,10 @@ export const PricingCard: React.FC<PricingCardProps> = ({ plan, cycle }) => {
                 {errors.phone && <span className="text-xs text-rose-400">{errors.phone}</span>}
               </label>
 
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-end">
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-end relative z-[10001]">
                 <button
                   type="button"
-                  onClick={handleCloseModal}
+                  onClick={() => handleCloseModal()}
                   className="w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-300 transition hover:border-slate-500 hover:text-white sm:w-auto"
                 >
                   Cancel
