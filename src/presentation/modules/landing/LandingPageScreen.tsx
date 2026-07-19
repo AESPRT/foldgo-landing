@@ -23,6 +23,12 @@ export const LandingPageScreen: React.FC = () => {
           <a href="#pricing" className="hover:text-white transition">Pricing</a>
           <a href="#contact" className="hover:text-white transition">Contact Us</a>
         </div>
+        <a
+          href="/admin-dashboard/login"
+          className="rounded-2xl bg-blue-600 px-5 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-white shadow-lg shadow-blue-500/10 transition hover:bg-blue-500 active:scale-[0.98]"
+        >
+          Admin Login
+        </a>
       </nav>
 
       <header className="relative z-10 mx-auto grid max-w-6xl gap-10 px-6 pt-24 pb-20 lg:grid-cols-[0.9fr_0.8fr] lg:items-center">
